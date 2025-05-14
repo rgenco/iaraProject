@@ -37,3 +37,21 @@ model Book {
 
   @@map("book")
 }
+
+model Entry {
+  id         Int      @id @default(autoincrement())
+  device     String
+  type       String
+  date       DateTime
+  mbg        Int?
+  sgv        Int?
+  delta      Int?
+  direction  String?
+  filtered   Int?
+  unfiltered Int?
+  rssi       Int?
+  noise      Int?
+  updatedAt  DateTime @updatedAt
+
+  @@map("entry")
+}

@@ -1,13 +1,13 @@
-import author from "../controllers/author.controller";
+import authorController from "../controllers/author.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 import { Router } from "express";
 
 const router = Router();
 
-router.get("", author.getAuthors);
-// router.get("/:id",verifyToken, author.getAuthor);
-router.post("/", author.createAuthor);
-// router.put("/:id", verifyToken, author.updateAuthor);
-// router.delete("/:id", verifyToken, author.deleteAuthor);
+router.get("", authorController.getAuthors);
+router.get("/:id", authorController.getAuthor);
+router.post("/", authorController.createAuthor);
+router.put("/:id", authorController.updateAuthor);
+router.delete("/:id", authorController.deleteAuthor);
 
 export default router;

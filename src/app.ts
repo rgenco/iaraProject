@@ -1,10 +1,13 @@
 import express, { NextFunction, Request, Response } from "express";
+import morganBody from "morgan-body";
+import bodyParser from "body-parser";
 
 import cors from "cors";
 
 const app = express();
 
 import authorRouter from "./routes/author.router";
+import entryRouter from "./routes/entry.router";
 
 // Rate limiting
 
@@ -23,9 +26,21 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.LOG_REQUEST_RESPONSE === "true") {
+  //Morgan Body log request and response data
+  app.use(bodyParser.json());
+
+  // hook morganBody to express app
+  morganBody(app, {
+    logAllReqHeader: true,
+    logAllResHeader: true,
+  });
+}
 // API Routes
 //ROUTER author
 app.use("/authors", authorRouter);
+//ROUTER entry
+app.use("/api/v1/entries", entryRouter);
 
 // Health check endpoint
 app.get("/health", (req: Request, res: Response) => {

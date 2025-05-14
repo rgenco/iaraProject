@@ -1,7 +1,8 @@
 import app from "./app";
 import { config } from "dotenv";
 import http from "http";
-import { consola, createConsola } from "consola";
+import { consola } from "consola";
+
 config();
 
 const PORT: number = parseInt(process.env.PORT || "3000", 10);
